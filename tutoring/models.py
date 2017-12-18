@@ -55,13 +55,13 @@ class Tutor(models.Model):
     mobile = models.CharField(null=False,
                               max_length=15,
                               )
-    verified = models.CharField(choices=VERIFIED,
+    verified = models.CharField(choices=VERIFIED_CHOICES,
                                 null=False,
                                 default=NOT_VERIFIED,
                                 max_length=1)
 
     class Meta(object):
-        ordering = ("first_name", "last_name")
+        ordering = ("first_name", "family_name")
 
     def __str__(self):
         return
