@@ -50,21 +50,25 @@ class Tutor(models.Model):
                               blank=True,
                               default=None,
                               )
-    email = models.EmailField(null=False)
+    email = models.EmailField(null=False,
+                              unique=True,
+                              )
     # TODO: Proper validation for numbers, and formats.
     mobile = models.CharField(null=False,
                               max_length=15,
+                              unique=True,
                               )
     verified = models.CharField(choices=VERIFIED_CHOICES,
                                 null=False,
                                 default=NOT_VERIFIED,
-                                max_length=1)
+                                max_length=1,
+                                )
 
     class Meta(object):
         ordering = ("first_name", "family_name")
 
     def __str__(self):
-        return
+        return f"{self.first_name} {self.family_name}"
 
 
 class State(models.Model):
@@ -91,7 +95,8 @@ class State(models.Model):
 
     name = models.CharField(choices=STATE_OPTIONS,
                             null=False,
-                            max_length=3)
+                            max_length=3,
+                            unique=True)
 
     class Meta(object):
         ordering = ("name",)
